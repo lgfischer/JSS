@@ -1,0 +1,21 @@
+<?xml version="1.0" ?> 
+<project name="jServices" default="dist">
+
+    <target name="init">
+        <mkdir dir="build" />
+        <mkdir dir="dist" />
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="src" destdir="build" includeantruntime="false" />
+    </target>
+
+    <target name="dist" depends="compile">
+        <jar destfile="dist/jServices.jar" basedir="build" />
+    </target>
+
+    <target name="clean">
+        <delete dir="build" />
+        <delete dir="dist" />
+    </target>
+</project>
