@@ -1,4 +1,4 @@
-package com.leonardofischer.jservice;
+package com.leonardofischer.jss;
 
 /**
  * Base class that must be implemented/extended to create a service that

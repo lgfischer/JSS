@@ -1,6 +1,6 @@
-package com.leonardofischer.jservice.test;
+package com.leonardofischer.jss.test;
 
-import com.leonardofischer.jservice.Service;
+import com.leonardofischer.jss.Service;
 
 public class ClockService extends Service {
 

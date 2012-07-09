@@ -1,4 +1,4 @@
-package com.leonardofischer.jservice;
+package com.leonardofischer.jss;
 
 import java.io.BufferedReader;
 import java.io.IOException;

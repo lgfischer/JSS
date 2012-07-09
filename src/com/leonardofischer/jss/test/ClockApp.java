@@ -1,4 +1,4 @@
-package com.leonardofischer.jservice.test;
+package com.leonardofischer.jss.test;
 
 import java.util.Date;
 
