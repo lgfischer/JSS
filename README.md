@@ -11,6 +11,7 @@ How to Use
 
 Implement the com.leonardofischer.jss.Service. You must implement the void start(String[] commandLineArgs) and void stop(String[] commandLineArgs) methods. Also, you need to implement the main method on your Service implementation, such as the following:
 
+package your.application.package;
 public class ApplicationService extends Service {
 
     public void start(String[] args) {
@@ -27,12 +28,20 @@ public class ApplicationService extends Service {
     }
 }
 
+Then start your application using:
+
+java your.application.package.ApplicationService start
+
+To stop your application, execute:
+
+java your.application.package.ApplicationService stop
+
 Know Issues
 -----------
 
-<TO BE WRITTEN>
+TODO: There are know issues, but I need to document better it :)
 
 Download
 --------
 
-<TO BE WRITTEN>
+[Binary JAR file]( https://github.com/lgfischer/JSS/raw/master/dist/jss.jar )
