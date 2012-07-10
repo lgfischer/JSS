@@ -1,5 +1,5 @@
 <?xml version="1.0" ?> 
-<project name="jServices" default="all">
+<project name="jss" default="all">
 
     <target name="init">
         <mkdir dir="build" />
@@ -11,7 +11,7 @@
     </target>
 
     <target name="dist" depends="compile">
-        <jar destfile="dist/jServices.jar" basedir="build" />
+        <jar destfile="dist/jss.jar" basedir="build" />
     </target>
 
     <target name="clean">
