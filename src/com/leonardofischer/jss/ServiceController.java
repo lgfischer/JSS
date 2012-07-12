@@ -72,6 +72,8 @@ public class ServiceController {
      */
     ServiceListenerThread serviceListener = null;
 
+    String pingCommand = ServiceController.class.getCanonicalName() + ".ping";
+
     /**
      * The lock that keeps the serviceListener to send the finished token before
      * the Service.start() method finishes its execution.
@@ -157,6 +159,11 @@ public class ServiceController {
     // based on
     // http://stackoverflow.com/questions/1229605/is-this-really-the-best-way-to-start-a-second-jvm-from-java-code
     void startService() {
+        if (isServiceRunning()) {
+            service.onServiceAlreadyRunning();
+            return;
+        }
+
         List<String> commands = new LinkedList<String>();
         commands.add(javaBin);
         commands.add("-cp");
@@ -170,7 +177,13 @@ public class ServiceController {
         try {
             processBuilder.start();
             Thread.sleep(restartWaitTime);
-            sendArguments("Service is running");
+            if (isServiceRunning()) {
+                service.onServiceStarted();
+                return;
+            }
+            else {
+                service.onServiceDidNotStarted();
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -198,7 +211,6 @@ public class ServiceController {
         }
         catch (Exception e) {
             service.onServiceAlreadyRunning();
-            service.printErrorMessage("Could not listen on port: " + port + ".");
         }
     }
 
@@ -255,6 +267,10 @@ public class ServiceController {
                             out.println(service.status(args));
                             out.println("");
                         }
+                        else if (serviceController.pingCommand.equals(command)) {
+                            out.println("pong");
+                            out.println("");
+                        }
                         else {
                             out.println(command);
                             out.println("");
@@ -284,7 +300,18 @@ public class ServiceController {
      * Sends the stop command to the running service.
      */
     void stopService() {
-        sendArguments(service.getStopCommand());
+        if (isServiceRunning()) {
+            sendCommand(service.getStopCommand());
+            if (!isServiceRunning()) {
+                service.onServiceStoped();
+            }
+            else {
+                service.onServiceDidNotStoped();
+            }
+        }
+        else {
+            service.onServiceNotRunning();
+        }
     }
 
     private void restartService() {
@@ -299,10 +326,51 @@ public class ServiceController {
     }
 
     void showServiceStatus() {
-        sendArguments(service.getStatusCommand());
+        if (isServiceRunning()) {
+            sendCommand(service.getStatusCommand());
+        }
+        else {
+            service.onServiceNotRunning();
+        }
     }
 
-    private void sendArguments(String command) {
+    private boolean isServiceRunning() {
+        Socket socket = null;
+        PrintWriter out = null;
+        BufferedReader in = null;
+
+        String host = null;
+
+        boolean isRunning = false;
+
+        try {
+            socket = new Socket((String) host, port);
+            out = new PrintWriter(socket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            out.println(pingCommand);
+            out.println("");
+
+            String output = in.readLine();
+            if ("pong".equals(output)) {
+                isRunning = true;
+            }
+
+            while (output != null && !"".equals(output)) {
+                output = in.readLine();
+            }
+
+            out.close();
+            in.close();
+            socket.close();
+        }
+        catch (Exception e) {
+            // ignore errors, they will be thrown if the service is not running
+        }
+        return isRunning;
+    }
+
+    private void sendCommand(String command) {
         Socket socket = null;
         PrintWriter out = null;
         BufferedReader in = null;

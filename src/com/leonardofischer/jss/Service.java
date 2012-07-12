@@ -68,7 +68,7 @@ public abstract class Service {
      * @return a string describing the current status of the service.
      */
     public String status(String[] commandLineArgs) {
-        return "Service is running";
+        return "STATUS: the service is running";
     }
 
     /**
@@ -93,6 +93,10 @@ public abstract class Service {
         return "Usage: java " + className + " {" + start + '|' + stop + '|' + restart + '|' + status + "}";
     }
 
+    public void onServiceStarted() {
+        printMessage("The service started");
+    }
+
     /**
      * This method is called when a stop/status/restart command is executed, but
      * the service is not running.
@@ -101,7 +105,7 @@ public abstract class Service {
      * "Service is not running"
      */
     public void onServiceNotRunning() {
-        printErrorMessage("Service is not running");
+        printErrorMessage("The service is not running");
     }
 
     /**
@@ -112,8 +116,20 @@ public abstract class Service {
      * "It appears that the service is already running".
      */
     public void onServiceAlreadyRunning() {
-        String msg = "The service is running or the port " + serviceController.getPort() + " is in use by another process.";
+        String msg = "The service is already running, or another process is using the port " + serviceController.getPort() + ".";
         printErrorMessage(msg);
+    }
+
+    public void onServiceStoped() {
+        printMessage("The service stoped");
+    }
+
+    public void onServiceDidNotStarted() {
+        printErrorMessage("ERROR: It seems that the service failed to start");
+    }
+
+    public void onServiceDidNotStoped() {
+        printErrorMessage("ERROR: The service did not stoped");
     }
 
     /**
