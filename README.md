@@ -44,5 +44,5 @@ Know Issues
 Download
 --------
 
-[Binary JAR file]( https://github.com/lgfischer/JSS/raw/master/dist/jss.jar )
-Source code: clone/branch it using ( https://github.com/lgfischer/JSS.git ) or [download as zip]( https://github.com/lgfischer/JSS/zipball/master )
+- Binary: [download JAR file]( https://github.com/lgfischer/JSS/raw/master/dist/jss.jar )
+- Source code: clone/branch it using ( https://github.com/lgfischer/JSS.git ) or [download as zip]( https://github.com/lgfischer/JSS/zipball/master )
