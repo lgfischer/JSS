@@ -56,3 +56,10 @@ Download
 
 - Binary: [download JAR file]( https://github.com/lgfischer/JSS/raw/master/dist/jss.jar )
 - Source code: clone/branch it using https://github.com/lgfischer/JSS.git or [download as zip]( https://github.com/lgfischer/JSS/zipball/master )
+
+
+
+More Info
+---------
+
+- [Introducing JSS: Java Simple Services](http://coderender.blogspot.com.br/2012/07/introducing-jss-java-simple-services.html)
