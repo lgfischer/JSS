@@ -1,5 +1,5 @@
-jServices
-=========
+JSS: Java Simple Services
+=========================
 
 Introduction
 ------------
