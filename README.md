@@ -1,10 +1,14 @@
 JSS: Java Simple Services
 =========================
 
+
+
 Introduction
 ------------
 
 Java Simple Services is a Java wraper that simplify the construction of background process easily. By implementing only one abstract class and creating a default main method on it, your application can run in backgroud, be stoped and you can query for its status without any complex code.
+
+
 
 How to Use
 ----------
@@ -36,10 +40,16 @@ To stop your application, execute:
 
     java your.application.package.ApplicationService stop
 
-Know Issues
------------
+
+
+Know Issues and Some Nice-to-have Features
+------------------------------------------
 
 - Some Service methods are missing documentation.
+- Needs a way to capture/redirect output from the running service.
+- The service doesn't restart if it crashes (but I'm not sure that it should restart)
+
+
 
 Download
 --------
