@@ -39,7 +39,7 @@ To stop your application, execute:
 Know Issues
 -----------
 
-- The Service methods onServiceNotRunning() and onServiceAlreadyRunning() are not being called at the right time.
+- Some Service methods are missing documentation.
 
 Download
 --------
